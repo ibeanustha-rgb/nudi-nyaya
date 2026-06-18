@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nudi & Nyaya</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --cream:   #F5EFE4;
+  --paper:   #EDE6D6;
+  --ink:     #1A1510;
+  --saffron: #E8833A;
+  --crimson: #B5341A;
+  --gold:    #C8963C;
+  --muted:   #6B6157;
+  --rule:    rgba(26,21,16,0.12);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* ── TOPBAR ── */
+.topbar{
+  background:var(--ink);color:var(--cream);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:7px 36px;
+  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.18em;text-transform:uppercase;
+}
+.topbar a{color:var(--saffron);text-decoration:none;}
+
+/* ── MASTHEAD ── */
+.masthead{
+  border-bottom:3px solid var(--ink);
+  padding:0 36px;
+  position:relative;overflow:hidden;
+  background:var(--cream);
+}
+
+/* MASSIVE Kannada letterform bleeding through masthead */
+.mast-kanna-1{
+  position:absolute;
+  top:-60px;left:-40px;
+  font-size:520px;font-weight:900;
+  color:var(--saffron);opacity:0.08;
+  pointer-events:none;user-select:none;line-height:1;
+  font-family:'Inter',sans-serif;
+  z-index:0;
+}
+.mast-kanna-2{
+  position:absolute;
+  top:-40px;right:-60px;
+  font-size:380px;font-weight:900;
+  color:var(--crimson);opacity:0.06;
+  pointer-events:none;user-select:none;line-height:1;
+  font-family:'Inter',sans-serif;
+  z-index:0;
+}
+
+.mast-nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0 10px;
+  border-bottom:1px solid var(--rule);
+  position:relative;z-index:2;
+  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);
+}
+.mast-nav-links{display:flex;gap:22px;}
+.mast-nav-links a{text-decoration:none;color:var(--muted);transition:color 0.2s;}
+.mast-nav-links a:hover{color:var(--saffron);}
+
+/* LOGO + TITLE CENTER */
+.mast-center{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:32px;
+  padding:28px 0 20px;
+  position:relative;z-index:2;
+}
+
+.mast-center-left{
+  display:flex;flex-direction:column;gap:6px;
+  border-right:1px solid var(--rule);
+  padding-right:32px;
+}
+.mast-kicker{
+  font-family:'Space Mono',monospace;font-size:8px;
+  letter-spacing:0.28em;text-transform:uppercase;color:var(--saffron);
+}
+.mast-desc{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:13px;line-height:1.55;color:var(--muted);
+}
+
+/* THE LOGO SVG */
+.logo-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+
+.mast-center-right{
+  border-left:1px solid var(--rule);
+  padding-left:32px;
+  display:flex;flex-direction:column;gap:6px;
+  align-items:flex-end;
+}
+
+.mast-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(42px,7vw,88px);
+  font-weight:900;letter-spacing:-0.02em;line-height:0.9;
+  color:var(--ink);text-align:right;
+}
+.mast-title .amp{color:var(--saffron);font-style:italic;}
+
+.mast-kannada-sub{
+  font-size:16px;color:var(--crimson);
+  text-align:right;margin-top:4px;letter-spacing:0.08em;
+}
+
+.mast-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:9px 0 11px;
+  border-top:1px solid var(--rule);
+  position:relative;z-index:2;
+  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);
+}
+.sub-btn{
+  background:var(--saffron);color:white;border:none;
+  padding:7px 16px;
+  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.18em;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;
+}
+.sub-btn:hover{background:var(--crimson);}
+
+/* ── SECTION BAND ── */
+.band{
+  background:var(--ink);
+  display:flex;align-items:center;gap:12px;
+  padding:8px 36px;
+  border-bottom:2px solid var(--saffron);
+}
+.band span{
+  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--cream);white-space:nowrap;
+}
+.band-line{flex:1;height:1px;background:rgba(255,255,255,0.12);}
+
+/* ── HERO — IMAGE 1 EDITORIAL STYLE ── */
+.hero{
+  border-bottom:2px solid var(--ink);
+  position:relative;overflow:hidden;
+  background:var(--cream);
+}
+
+/* Top headline bar spanning full width */
+.hero-topbar{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--ink);
+}
+.hero-topbar-left{
+  padding:20px 28px;
+  border-right:1px solid var(--ink);
+}
+.hero-topbar-right{
+  padding:20px 28px;
+}
+.hero-big-hl{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,3vw,36px);font-weight:900;line-height:1.1;
+  color:var(--ink);
+}
+.hero-big-hl-right{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,2.5vw,30px);font-weight:700;line-height:1.15;
+  color:var(--ink);text-align:right;
+}
+
+/* 3-column body with star image punching through */
+.hero-body-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  position:relative;
+  min-height:480px;
+}
+.hero-col-a{
+  padding:24px 22px;
+  border-right:1px solid var(--rule);
+  font-size:13px;line-height:1.78;color:var(--ink);
+  position:relative;z-index:1;
+}
+.hero-col-b{
+  padding:24px 22px;
+  border-right:1px solid var(--rule);
+  font-size:13px;line-height:1.78;color:var(--ink);
+  position:relative;z-index:1;
+}
+.hero-col-c{
+  padding:24px 22px;
+  font-size:13px;line-height:1.78;color:var(--ink);
+  position:relative;z-index:1;
+}
+
+.hero-col-a p,.hero-col-b p,.hero-col-c p{margin-bottom:12px;}
+
+/* The photo clipped as a star polygon — punches over all 3 cols */
+.hero-star-img{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(300px,48vw,560px);
+  height:clamp(300px,48vw,560px);
+  z-index:10;
+  pointer-events:none;
+}
+.hero-star-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  clip-path:polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+  filter:sepia(0.15) contrast(1.08);
+}
+
+/* drop cap */
+.hero-col-a p:first-child::first-letter{
+  font-family:'Playfair Display',serif;
+  font-size:62px;font-weight:900;line-height:0.8;
+  float:left;margin:3px 7px 0 0;color:var(--saffron);
+}
+
+/* italic pull quote inside col */
+.hero-pq{
+  border-top:2px solid var(--saffron);
+  border-bottom:1px solid var(--rule);
+  padding:10px 0;margin:12px 0;
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:14px;line-height:1.5;color:var(--ink);
+}
+
+/* section labels like Image 1 */
+.hero-section-label{
+  font-family:'Space Mono',monospace;
+  font-size:8px;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--saffron);border-bottom:1px solid var(--rule);
+  padding-bottom:6px;margin-bottom:10px;
+}
+
+.hero-bottom-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 28px;
+  border-top:1px solid var(--ink);
+  background:var(--paper);
+}
+.hero-bottom-meta{
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);
+}
+
+.eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:8px;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:12px;
+}
+.hero-hl{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,4vw,50px);font-weight:900;line-height:1.08;
+  color:var(--ink);
+}
+.hero-deck{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:16px;line-height:1.65;color:var(--muted);margin-top:14px;
+}
+.hero-meta{
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);padding-top:12px;border-top:1px solid var(--rule);
+}
+.pull-q{
+  border-top:3px solid var(--saffron);
+  border-bottom:1px solid var(--rule);
+  padding:14px 0;margin:20px 0;
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:17px;line-height:1.55;color:var(--ink);
+}
+.read-btn{
+  display:inline-block;margin-top:8px;
+  background:var(--ink);color:var(--cream);border:none;
+  padding:10px 20px;
+  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.18em;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;
+}
+.read-btn:hover{background:var(--saffron);}
+
+.sbox{border:1px solid var(--ink);padding:16px;}
+.sbox-title{
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:10px;
+}
+.sbox ul{list-style:none;}
+.sbox ul li{
+  font-size:12px;line-height:1.6;padding:5px 0 5px 14px;
+  border-bottom:1px solid var(--rule);position:relative;
+}
+.sbox ul li::before{content:'→';position:absolute;left:0;color:var(--saffron);font-size:9px;}
+
+/* ── DIVIDER WITH BIG KANNADA ── */
+.kanna-divider{
+  padding:0 36px;
+  border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+  background:var(--ink);
+  overflow:hidden;
+  height:90px;
+  position:relative;
+  display:flex;align-items:center;
+}
+.kd-text{
+  font-family:'Space Mono',monospace;
+  font-size:9px;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--cream);position:relative;z-index:2;
+}
+.kd-bg{
+  position:absolute;
+  top:50%;left:0;right:0;
+  transform:translateY(-50%);
+  font-size:180px;font-weight:900;
+  color:var(--saffron);opacity:0.07;
+  font-family:'Inter',sans-serif;
+  user-select:none;pointer-events:none;
+  white-space:nowrap;text-align:center;
+  line-height:1;letter-spacing:-0.02em;
+  z-index:1;
+}
+
+/* ── ARTICLE GRID ── */
+.agrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-bottom:2px solid var(--ink);
+}
+.acard{
+  padding:26px 26px 22px;
+  border-right:1px solid var(--ink);
+  display:flex;flex-direction:column;gap:9px;
+  cursor:pointer;transition:background 0.18s;
+  position:relative;overflow:hidden;
+}
+.acard:last-child{border-right:none;}
+.acard:hover{background:var(--paper);}
+.acard-kanna{
+  position:absolute;bottom:-10px;right:-5px;
+  font-size:80px;font-weight:900;
+  color:var(--saffron);opacity:0.07;
+  font-family:'Inter',sans-serif;
+  pointer-events:none;user-select:none;line-height:1;
+}
+.ac-num{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);}
+.ac-hl{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;line-height:1.22;color:var(--ink);}
+.ac-ex{font-size:12.5px;line-height:1.65;color:var(--muted);font-weight:300;flex:1;}
+.ac-tag{
+  display:inline-block;
+  font-family:'Space Mono',monospace;font-size:7.5px;letter-spacing:0.14em;text-transform:uppercase;
+  border:1px solid var(--saffron);color:var(--saffron);
+  padding:3px 7px;margin-right:4px;margin-top:3px;
+}
+.ac-date{
+  font-family:'Space Mono',monospace;font-size:7.5px;letter-spacing:0.12em;
+  color:var(--muted);padding-top:9px;border-top:1px solid var(--rule);
+}
+
+/* ── SUBSCRIBE STRIP ── */
+.sub-strip{
+  background:var(--ink);
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;
+  padding:52px 36px;
+  border-bottom:3px solid var(--saffron);
+  position:relative;overflow:hidden;
+}
+.ss-kanna{
+  position:absolute;right:-20px;top:50%;transform:translateY(-50%);
+  font-size:260px;font-weight:900;
+  color:var(--saffron);opacity:0.05;
+  font-family:'Inter',sans-serif;user-select:none;pointer-events:none;line-height:1;
+}
+.ss-left h2{
+  font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,44px);
+  font-weight:700;line-height:1.15;color:var(--cream);position:relative;z-index:1;
+}
+.ss-left h2 em{color:var(--saffron);font-style:italic;}
+.ss-left p{font-size:13px;line-height:1.7;color:rgba(245,239,228,0.5);margin-top:12px;font-weight:300;position:relative;z-index:1;}
+.sf{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1;}
+.sf input{
+  background:rgba(245,239,228,0.07);border:1px solid rgba(245,239,228,0.18);
+  padding:12px 15px;font-family:'Inter',sans-serif;font-size:14px;color:var(--cream);outline:none;
+  transition:border-color 0.2s;
+}
+.sf input::placeholder{color:rgba(245,239,228,0.28);}
+.sf input:focus{border-color:var(--saffron);}
+.sf button{
+  background:var(--saffron);color:white;border:none;padding:12px 20px;align-self:flex-start;
+  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;
+}
+.sf button:hover{background:var(--crimson);}
+.sf-note{font-family:'Space Mono',monospace;font-size:7.5px;letter-spacing:0.12em;color:rgba(245,239,228,0.22);text-transform:uppercase;}
+
+/* ── FOOTER ── */
+footer{
+  padding:24px 36px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:3px solid var(--ink);
+}
+.ft-brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;}
+.ft-brand span{color:var(--saffron);font-style:italic;}
+.ft-links{display:flex;gap:18px;}
+.ft-links a{
+  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;transition:color 0.2s;
+}
+.ft-links a:hover{color:var(--saffron);}
+.ft-copy{font-family:'Space Mono',monospace;font-size:7.5px;letter-spacing:0.1em;color:var(--muted);}
+
+/* ── MODAL ── */
+.modal-ov{
+  position:fixed;inset:0;background:rgba(26,21,16,0.9);
+  z-index:1000;display:none;align-items:flex-start;justify-content:center;
+  overflow-y:auto;padding:40px 20px;
+}
+.modal-ov.open{display:flex;}
+.modal{
+  background:var(--cream);max-width:720px;width:100%;
+  padding:52px 52px 60px;position:relative;margin:auto;
+}
+.mc-close{
+  position:absolute;top:18px;right:22px;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;border:none;background:none;transition:color 0.2s;
+}
+.mc-close:hover{color:var(--saffron);}
+.mc-eye{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.25em;text-transform:uppercase;color:var(--saffron);margin-bottom:10px;}
+.mc-hl{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,42px);font-weight:900;line-height:1.1;color:var(--ink);margin-bottom:14px;}
+.mc-deck{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.65;color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:18px;margin-bottom:22px;}
+.mc-body{font-size:15px;line-height:1.85;color:var(--ink);}
+.mc-body p{margin-bottom:16px;}
+.mc-body p:first-child::first-letter{font-family:'Playfair Display',serif;font-size:70px;font-weight:900;line-height:0.8;float:left;margin:4px 10px 0 0;color:var(--saffron);}
+.mc-body h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin:24px 0 8px;color:var(--ink);}
+.mc-meta{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:28px;padding-top:14px;border-top:1px solid var(--rule);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:800px){
+  .topbar,.masthead,.band,.kanna-divider,.sub-strip,footer{padding-left:18px;padding-right:18px;}
+  .mast-center{grid-template-columns:1fr;gap:20px;}
+  .mast-center-left,.mast-center-right{border:none;padding:0;}
+  .mast-title{text-align:left;}
+  .mast-kannada-sub{text-align:left;}
+  .hero{grid-template-columns:1fr;}
+  .hero-left{border-right:none;border-bottom:2px solid var(--ink);}
+  .agrid{grid-template-columns:1fr;}
+  .acard{border-right:none;border-bottom:1px solid var(--ink);}
+  .sub-strip{grid-template-columns:1fr;gap:28px;}
+  footer{flex-direction:column;gap:12px;text-align:center;}
+  .modal{padding:36px 22px 48px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>Nudi &amp; Nyaya // Bengaluru</span>
+  <span><a href="#">nudinyaya.substack.com</a></span>
+  <span id="today-date"></span>
+</div>
+
+<header class="masthead">
+  <div class="mast-kanna-1">ನ</div>
+  <div class="mast-kanna-2">ನ್ಯ</div>
+
+  <div class="mast-nav">
+    <div class="mast-nav-links">
+      <a href="#">Issues</a>
+      <a href="#">RTI</a>
+      <a href="#">Tenants</a>
+      <a href="#">Labour</a>
+      <a href="#">About</a>
+    </div>
+    <button class="sub-btn" onclick="openSub()">Subscribe Free →</button>
+    <span>Est. 2026 · Bengaluru, KA</span>
+  </div>
+
+  <div class="mast-center">
+    <div class="mast-center-left">
+      <div class="mast-kicker">Bengaluru · Legal · Newsletter</div>
+      <div class="mast-desc">Plain law for the people who live here. Free, weekly, no jargon.</div>
+    </div>
+
+    <!-- INLINE LOGO SVG -->
+    <div class="logo-wrap">
+      <svg width="110" height="110" viewBox="0 0 300 300" role="img" aria-label="Nudi and Nyaya logo">
+        <circle cx="150" cy="150" r="148" fill="#1A1510"/>
+        <circle cx="150" cy="150" r="145" fill="none" stroke="#E8833A" stroke-width="3"/>
+        <circle cx="150" cy="150" r="138" fill="none" stroke="#E8833A" stroke-width="1"/>
+        <!-- ghost Kannada -->
+        <text x="90" y="195" font-family="serif" font-size="130" font-weight="900" fill="#E8833A" opacity="0.13">ನ</text>
+        <!-- beam -->
+        <rect x="90" y="91" width="120" height="6" rx="3" fill="#E8833A"/>
+        <circle cx="150" cy="94" r="5" fill="#1A1510"/>
+        <circle cx="150" cy="94" r="3" fill="#E8833A"/>
+        <!-- chains -->
+        <line x1="98" y1="97" x2="98" y2="132" stroke="#E8833A" stroke-width="2.5"/>
+        <line x1="202" y1="97" x2="202" y2="118" stroke="#C8963C" stroke-width="2.5"/>
+        <!-- pans -->
+        <path d="M80 132 Q98 142 116 132" fill="none" stroke="#E8833A" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M184 118 Q202 128 220 118" fill="none" stroke="#C8963C" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- pan dots -->
+        <rect x="84" y="127" width="8" height="8" fill="#E8833A"/>
+        <rect x="108" y="127" width="8" height="8" fill="#E8833A"/>
+        <rect x="188" y="113" width="8" height="8" fill="#C8963C"/>
+        <rect x="212" y="113" width="8" height="8" fill="#C8963C"/>
+        <!-- pillar -->
+        <rect x="144" y="97" width="12" height="50" rx="2" fill="#E8833A"/>
+        <rect x="132" y="143" width="36" height="6" rx="1" fill="#E8833A"/>
+        <rect x="132" y="143" width="6" height="30" rx="1" fill="#E8833A"/>
+        <rect x="162" y="143" width="6" height="30" rx="1" fill="#E8833A"/>
+        <rect x="138" y="149" width="3" height="22" fill="#1A1510" opacity="0.35"/>
+        <rect x="144" y="149" width="3" height="22" fill="#1A1510" opacity="0.35"/>
+        <rect x="150" y="149" width="3" height="22" fill="#1A1510" opacity="0.35"/>
+        <rect x="156" y="149" width="3" height="22" fill="#1A1510" opacity="0.35"/>
+        <rect x="124" y="173" width="52" height="6" rx="1" fill="#E8833A"/>
+        <!-- double rule -->
+        <line x1="50" y1="196" x2="250" y2="196" stroke="#E8833A" stroke-width="1.5"/>
+        <line x1="50" y1="199" x2="250" y2="199" stroke="#C8963C" stroke-width="0.6" opacity="0.5"/>
+        <!-- wordmark -->
+        <text x="150" y="218" text-anchor="middle" font-family="Georgia,serif" font-size="17" font-weight="700" fill="#E8833A" letter-spacing="3">NUDI &amp; NYAYA</text>
+        <text x="150" y="234" text-anchor="middle" font-family="serif" font-size="11" fill="#C8963C" letter-spacing="3">ನುಡಿ · ನ್ಯಾಯ</text>
+        <line x1="60" y1="242" x2="240" y2="242" stroke="#E8833A" stroke-width="0.8" opacity="0.4"/>
+        <text x="150" y="255" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#E8833A" letter-spacing="2.5" opacity="0.6">BENGALURU · EST. 2026</text>
+        <rect x="20" y="276" width="260" height="3" rx="1" fill="#E8833A"/>
+      </svg>
+    </div>
+
+    <div class="mast-center-right">
+      <div class="mast-title">Nudi <span class="amp">&</span><br/>Nyaya</div>
+      <div class="mast-kannada-sub">ನುಡಿ ಮತ್ತು ನ್ಯಾಯ</div>
+    </div>
+  </div>
+
+  <div class="mast-bottom">
+    <span id="issue-label">Issue No. 01 — June 2026</span>
+    <span>Free · Weekly · Plain Language</span>
+  </div>
+</header>
+
+<div class="band" id="hero-band">
+  <span>Lead Story</span>
+  <div class="band-line"></div>
+</div>
+
+<div id="hero-container"></div>
+
+<!-- Kannada divider strip -->
+<div class="kanna-divider">
+  <div class="kd-bg">ನುಡಿ ನ್ಯಾಯ ನುಡಿ ನ್ಯಾಯ</div>
+  <span class="kd-text">ನುಡಿ ಮತ್ತು ನ್ಯಾಯ &nbsp;·&nbsp; Plain Law for Bengaluru &nbsp;·&nbsp; Free Every Week</span>
+</div>
+
+<div class="band" id="more-band" style="display:none;">
+  <span>More Issues</span>
+  <div class="band-line"></div>
+</div>
+
+<div class="agrid" id="article-grid"></div>
+
+<div class="sub-strip">
+  <div class="ss-left">
+    <div class="ss-kanna">ನ್ಯಾ</div>
+    <h2>Legal clarity,<br/><em>delivered weekly.</em></h2>
+    <p>No jargon. No paywalls. Just the law explained plainly for people who live and work in Bengaluru.</p>
+  </div>
+  <div class="sf">
+    <input type="email" placeholder="your@email.com"/>
+    <button onclick="openSub()">Subscribe Free →</button>
+    <span class="sf-note">Free forever · Unsubscribe any time</span>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-brand">Nudi <span>&</span> Nyaya</div>
+  <div class="ft-links">
+    <a href="#">All Issues</a>
+    <a href="#">About</a>
+    <a href="#">Subscribe</a>
+  </div>
+  <div class="ft-copy">© 2026 · Bengaluru, India</div>
+</footer>
+
+<div class="modal-ov" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <button class="mc-close" onclick="closeModal()">[ Close × ]</button>
+    <div class="mc-eye" id="m-eye"></div>
+    <h2 class="mc-hl" id="m-hl"></h2>
+    <div class="mc-deck" id="m-deck"></div>
+    <div class="mc-body" id="m-body"></div>
+    <div class="mc-meta" id="m-meta"></div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// ADD NEW ISSUES AT THE TOP OF THIS ARRAY
+// ════════════════════════════════════════════
+const ARTICLES = [
+  {
+    id:1,issue:"Issue No. 01",date:"June 14, 2026",readTime:"8 min read",
+    tags:["BBMP","Urban Governance","RTI"],
+    headline:"Who Governs Bengaluru's Garbage?",
+    deck:"The ₹39,000-crore waste contract isn't just a corruption story. It's a question about who the city actually belongs to.",
+    excerpt:"Bengaluru awarded one of the largest municipal contracts in its history — ₹39,000 crore — with no public consultation. Most residents found out through a headline, if at all.",
+    body:`<p>Bengaluru recently awarded one of the largest municipal contracts in its history — ₹39,000 crore for waste management over the next several years. If you missed it, that's not surprising. The announcement didn't come with a public consultation. There was no town hall. Most residents found out through a news headline, if at all.</p>
+<p>The corruption allegations that followed got most of the attention. But there's a quieter, more fundamental problem underneath them: citizens have almost no formal mechanism to scrutinise how contracts of this size get awarded, structured, or monitored.</p>
+<h3>What the law says — and what it doesn't</h3>
+<p>The Karnataka Transparency in Public Procurements Act, 1999 requires that government tenders above a certain value be publicly notified and follow a competitive bidding process. On paper, this exists. In practice, the details of evaluation criteria, bid comparisons, and selection rationale are rarely accessible to ordinary residents without filing an RTI.</p>
+<p>Which means your first real tool here is the Right to Information Act, 2005. Any citizen can file an RTI with the BBMP asking for the contract documents, the tender evaluation report, and the names of the companies that bid. It costs ₹10. The authority has 30 days to respond. Most people don't know this is an option.</p>
+<h3>Why this matters beyond the contract itself</h3>
+<p>A ₹39,000-crore contract isn't just about garbage. It determines which parts of the city get serviced first, how waste workers are paid and protected, and whether the environmental commitments made on paper ever get enforced on the ground. When citizens can't see the contract, they can't hold anyone to it.</p>
+<h3>What you can do</h3>
+<p>File an RTI with BBMP requesting the full tender documents. Write formally to your ward councillor asking for a public briefing. The city is not managed by officials alone — it belongs to the people paying for it, which is all of us, one garbage fee at a time.</p>`,
+    sidebarTitle:"Your RTI Toolkit",
+    sidebarItems:["File at bbmp.gov.in","Cost: ₹10 postal order","Authority responds in 30 days","Ask for: tender docs, bid evaluation","First appeal: BBMP PIO if ignored"]
+  }
+  // ADD NEW ISSUES HERE ↑
+];
+
+function render(){
+  const hero=ARTICLES[0],rest=ARTICLES.slice(1);
+  document.getElementById('issue-label').textContent=`${hero.issue} — ${hero.date}`;
+  document.getElementById('hero-band').querySelector('span').textContent=`Lead Story — ${hero.issue}`;
+
+  document.getElementById('hero-container').innerHTML=`
+    <div class="hero">
+
+      <!-- TOP HEADLINE BAR — 2 cols like Image 1 -->
+      <div class="hero-topbar">
+        <div class="hero-topbar-left">
+          <div class="eyebrow">${hero.issue} · ${hero.tags.join(' · ')}</div>
+          <h2 class="hero-big-hl">${hero.headline}</h2>
+        </div>
+        <div class="hero-topbar-right">
+          <div class="eyebrow">In This Issue</div>
+          <h2 class="hero-big-hl-right">${hero.deck}</h2>
+        </div>
+      </div>
+
+      <!-- 3-COL BODY with star photo punching through -->
+      <div class="hero-body-wrap">
+
+        <!-- COLUMN A -->
+        <div class="hero-col-a">
+          <div class="hero-section-label">The Story</div>
+          <p>Bengaluru recently awarded one of the largest municipal contracts in its history — ₹39,000 crore for waste management. If you missed it, that's not surprising. There was no public consultation. No town hall. Most residents found out through a headline, if at all.</p>
+          <p>The corruption allegations that followed got most of the attention. But the quieter, more fundamental problem is this: citizens have almost no formal mechanism to scrutinise how contracts of this size get awarded.</p>
+          <div class="hero-pq">"The city is not managed by officials alone. It belongs to the people paying for it."</div>
+          <p>A ₹39,000-crore contract isn't just about garbage. It determines which parts of the city get serviced first, how waste workers are paid, and whether environmental commitments on paper are ever enforced on the ground.</p>
+        </div>
+
+        <!-- COLUMN B — the photo star punches across here -->
+        <div class="hero-col-b">
+          <p style="margin-top:180px;">The Karnataka Transparency in Public Procurements Act, 1999 requires government tenders above a certain value to be publicly notified. In practice, the evaluation criteria and bid rationale are rarely accessible without filing an RTI.</p>
+          <p>Which means your first real tool here is the Right to Information Act, 2005. Any citizen can file with the BBMP asking for the contract documents, tender evaluation report, and names of companies that bid. It costs ₹10. The authority has 30 days to respond.</p>
+        </div>
+
+        <!-- COLUMN C -->
+        <div class="hero-col-c">
+          <div class="hero-section-label">What You Can Do</div>
+          <div class="sbox" style="margin-bottom:14px;">
+            <div class="sbox-title">${hero.sidebarTitle}</div>
+            <ul>${hero.sidebarItems.map(i=>`<li>${i}</li>`).join('')}</ul>
+          </div>
+          <p style="font-size:12px;line-height:1.7;color:var(--muted);margin-top:10px;">Write formally to your ward councillor asking for a public briefing. The city belongs to the people paying for it — which is all of us, one garbage fee at a time.</p>
+          <button class="read-btn" onclick="openArticle(0)" style="margin-top:16px;">Read Full Issue →</button>
+        </div>
+
+        <!-- THE STAR-CLIPPED PHOTO — punching across all 3 cols -->
+        <div class="hero-star-img">
+          <img src="${hero.image}" alt="${hero.headline}" onerror="this.style.display='none'"/>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM BAR -->
+      <div class="hero-bottom-bar">
+        <span class="hero-bottom-meta">${hero.date} · ${hero.readTime} · Nudi &amp; Nyaya · Free</span>
+        <span class="hero-bottom-meta" style="font-family:'Playfair Display',serif;font-style:italic;font-size:11px;color:var(--saffron);">ನುಡಿ ಮತ್ತು ನ್ಯಾಯ</span>
+        <span class="hero-bottom-meta">Issue No. 0${hero.id} of Nudi &amp; Nyaya</span>
+      </div>
+
+    </div>`;
+
+  if(rest.length>0){
+    document.getElementById('more-band').style.display='flex';
+    document.getElementById('article-grid').innerHTML=rest.map((a,i)=>`
+      <div class="acard" onclick="openArticle(${i+1})">
+        <div class="acard-kanna">ನ</div>
+        <div class="ac-num">${a.issue}</div>
+        <div class="ac-hl">${a.headline}</div>
+        <div class="ac-ex">${a.excerpt}</div>
+        <div>${a.tags.map(t=>`<span class="ac-tag">${t}</span>`).join('')}</div>
+        <div class="ac-date">${a.date} · ${a.readTime}</div>
+      </div>`).join('');
+  }
+}
+
+function openArticle(i){
+  const a=ARTICLES[i];
+  document.getElementById('m-eye').textContent=`${a.issue} · ${a.date}`;
+  document.getElementById('m-hl').textContent=a.headline;
+  document.getElementById('m-deck').textContent=a.deck;
+  document.getElementById('m-body').innerHTML=a.body;
+  document.getElementById('m-meta').textContent=`${a.readTime} · ${a.tags.join(', ')} · Nudi & Nyaya`;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){
+  if(!e||e.target===document.getElementById('modal')||e.target.classList.contains('mc-close')){
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+function openSub(){window.open('https://nudinyaya.substack.com','_blank');}
+
+document.getElementById('today-date').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+render();
+</script>
+</body>
+</html>
